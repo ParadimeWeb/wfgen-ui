@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next";
+import { Container, Header, Main, TopMenu } from "@/components";
 
 type Props = {
     params: { id: string }
@@ -8,10 +9,6 @@ export async function generateMetadata(
     parent: ResolvingMetadata
 ): Promise<Metadata> {
     const { id } = params;
-    // const request = await fetch(`https://.../${id}`).then((res) => res.json());
-    // return {
-    //     title: request.title
-    // }
     return {
         title: `Request #${id}`
     };
@@ -19,5 +16,14 @@ export async function generateMetadata(
 
 export default function Home({ params }: Props) {
     const { id } = params;
-    return <div>{`Request #${id}`}</div>;
+    return (
+        <Container>
+            <Header>
+                <TopMenu />
+            </Header>
+            <Main>
+                <div className="h-96">{`Request #${id}`}</div>
+            </Main>
+        </Container>
+    );
 }

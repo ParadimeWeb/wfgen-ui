@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <Container>
             <Header>
-                <TopMenu />
+                <TopMenu selectedId="home" />
             </Header>
             <Main>
                 <div className="h-96">Dashboard</div>

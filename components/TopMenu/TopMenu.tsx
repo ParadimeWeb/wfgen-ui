@@ -1,34 +1,24 @@
 "use client"
-import { makeStyles, Toolbar, Overflow, OverflowItem, ToolbarGroup, ToolbarButton, Button, Dialog, DialogTrigger, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, Persona } from "@fluentui/react-components";
+import { makeStyles, Toolbar, Overflow, OverflowItem, ToolbarGroup, ToolbarButton, Button, Dialog, DialogTrigger, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, Persona, tokens, mergeClasses } from "@fluentui/react-components";
 import { SettingsRegular } from '@fluentui/react-icons';
 import { OverflowMenu } from "./Overflow";
 import Image from "next/image";
 
 const useStyles = makeStyles({
-    toolbar: {
-        flexGrow: 1,
-        '& a': {
-            minWidth: 'auto'
-        }
-    },
-    overflowToolbarGroup: {
-        display: 'flex',
-        flexGrow: 1, 
-        flexWrap: 'nowrap'
-    },
-    persona: {
-        verticalAlign: 'middle'
+    selected: {
+        backgroundColor: tokens.colorNeutralBackground1Hover,
+        color: tokens.colorNeutralForeground2Hover
     }
 });
 
 export const TopMenu = ({ selectedId }: { selectedId?: string; }) => {
     const styles = useStyles();
-    return <Toolbar className={styles.toolbar}>
-        <Image alt="WorkflowGen" src="/workflowgen.png" width={32} height={32} />
+    return <Toolbar className="grow [&_a]:min-w-0">
+        <Image alt="WorkflowGen" src="/workflowgen.png" width={32} height={32} className="mr-1" />
         <Overflow>
-            <ToolbarGroup role="presentation" className={styles.overflowToolbarGroup}>
+            <ToolbarGroup role="presentation" className="flex grow flex-nowrap">
                 <OverflowItem id="home">
-                    <ToolbarButton as="a" href="/">Home</ToolbarButton>
+                    <ToolbarButton as="a" href="/" className={mergeClasses(selectedId === 'home' && styles.selected)}>Home</ToolbarButton>
                 </OverflowItem>
                 <OverflowItem id="views">
                     <ToolbarButton as="a" href="/">Views</ToolbarButton>
@@ -43,7 +33,7 @@ export const TopMenu = ({ selectedId }: { selectedId?: string; }) => {
             </ToolbarGroup>
         </Overflow>
         <ToolbarGroup role="presentation">
-            <Persona className={styles.persona} textAlignment="center" name="Gabriel Beauchamp" />
+            <Persona className="align-middle" textAlignment="center" name="Gabriel Beauchamp" />
             <Dialog>
                 <DialogTrigger disableButtonEnhancement>
                     <ToolbarButton icon={<SettingsRegular />} />
